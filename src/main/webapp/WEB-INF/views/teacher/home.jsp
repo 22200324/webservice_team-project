@@ -16,7 +16,7 @@
             gap: 20px;
             max-width: 600px;
         }
-        a {
+        .menu a{
             display: block;
             padding: 25px;
             background: white;
@@ -28,11 +28,39 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         a:hover { background: #eef1ff; }
+
+        body {
+            margin: 0;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f7f8fa;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #0d0d2b;
+            padding: 18px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
     </style>
 </head>
+
 <body>
 
-<h2>👩‍🏫 선생님 페이지</h2>
+<div class="navbar">
+    <div class="logo">참!잘했어요</div>
+    <div class="menu">
+        <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+    </div>
+</div>
 
 <div class="menu">
     <a href="${pageContext.request.contextPath}/teacher/class/new">🏫 학급 생성</a>

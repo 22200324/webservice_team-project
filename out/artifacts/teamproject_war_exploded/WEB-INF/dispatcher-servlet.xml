@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- @Controller, @RequestMapping 활성화 -->
+    <mvc:annotation-driven />
+
+    <!-- 인터셉터는 반드시 하나의 블록에 -->
+    <mvc:interceptors>
+
+        <!-- 1️⃣ 로그인 여부 확인 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <mvc:mapping path="/parent/**"/>
+            <mvc:mapping path="/teacher/**"/>
+            <mvc:mapping path="/diary/**"/>
+            <bean class="org.example.teamproject.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- 2️⃣ 권한(Role) 확인 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <mvc:mapping path="/parent/**"/>
+            <mvc:mapping path="/teacher/**"/>
+            <bean class="org.example.teamproject.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <!-- 컴포넌트 스캔 -->
+    <context:component-scan base-package="org.example.teamproject" />
+
+    <!-- JSP View Resolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+</beans>

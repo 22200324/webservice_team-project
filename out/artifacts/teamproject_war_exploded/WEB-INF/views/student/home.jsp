@@ -53,20 +53,20 @@
 <div class="card-container">
     <div class="card"
          onclick="location.href='${pageContext.request.contextPath}/diary/all'">
-        <div class="card-title">🌍모두의 일기</div>
-        <div class="card-desc">전체에게 공개된 일기를 볼 수 있어요 😊</div>
+        <h3>🌍 전체 일기</h3>
+        <p>모두가 공개한 일기</p>
     </div>
 
     <div class="card"
          onclick="location.href='${pageContext.request.contextPath}/diary/class'">
-        <div class="card-title">🏫 우리반 일기</div>
-        <div class="card-desc">우리 반 친구들이 작성한 일기 🧑‍🤝‍🧑</div>
+        <h3>🏫 우리반 일기</h3>
+        <p>우리 반 친구들의 일기</p>
     </div>
 
     <div class="card"
          onclick="location.href='${pageContext.request.contextPath}/diary/mine'">
-        <div class="card-title">📔 내 일기</div>
-        <div class="card-desc">내가 쓴 일기들을 모아볼 수 있어요 ✨</div>
+        <h3>📔 내 일기</h3>
+        <p>내가 쓴 일기 모아보기</p>
     </div>
 </div>
 

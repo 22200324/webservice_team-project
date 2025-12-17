@@ -51,6 +51,7 @@
         <input type="password" name="password" placeholder="비밀번호 (1234)" required>
         <button type="submit">로그인</button>
     </form>
+
 </div>
 </body>
 </html>

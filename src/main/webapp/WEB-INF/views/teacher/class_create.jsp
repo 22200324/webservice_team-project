@@ -1,17 +1,25 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yooneerum
-  Date: 25. 12. 18.
-  Time: 오전 2:56
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/resources/css/app.css">
+
+
+    <title>학급 생성</title>
+
 </head>
 <body>
-<h2>학급 생성</h2>
-<p>여기서 학급 이름, 설명 입력</p>
+
+<jsp:include page="/WEB-INF/views/common/navbar.jsp" />
+<div class="box">
+    <h2>🏫 학급 생성</h2>
+
+    <form method="post" action="${pageContext.request.contextPath}/teacher/class/new">
+        <input type="text" name="className" placeholder="학급 이름" required>
+        <button type="submit">학급 만들기</button>
+    </form>
+</div>
+
 </body>
 </html>

@@ -1,15 +1,14 @@
 package org.example.teamproject.controller;
 
 import org.example.teamproject.DAO.ClassDAO;
+import org.example.teamproject.DAO.NoticeDAO;
+import org.example.teamproject.DAO.UserDAO;
 import org.example.teamproject.vo.ClassVO;
 import org.example.teamproject.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +19,11 @@ public class TeacherController {
     @Autowired
     private ClassDAO classDAO;
 
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private NoticeDAO noticeDAO;
 
     // 선생님 메인
     @GetMapping("/home")
@@ -46,6 +50,28 @@ public class TeacherController {
 
         return "teacher/class_list";
     }
+
+    @GetMapping("/class/{classId}")
+    public String classDetail(
+            @PathVariable int classId,
+            Model model
+    ) {
+        ClassVO clazz = classDAO.findById(classId);
+
+        model.addAttribute("clazz", clazz);
+        model.addAttribute("students",
+                userDAO.findStudentsByClassCode(clazz.getClassCode())
+        );
+        model.addAttribute("parents",
+                userDAO.findParentsByClassCode(clazz.getClassCode())
+        );
+        model.addAttribute("notices",
+                noticeDAO.findByClassCode(clazz.getClassCode())
+        );
+
+        return "teacher/class_detail";
+    }
+
 
 
     // 공지 작성 페이지

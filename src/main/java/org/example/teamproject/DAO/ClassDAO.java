@@ -72,4 +72,23 @@ public class ClassDAO {
         jdbcTemplate.update(sql, classId, teacherId);
     }
 
+    // 학급 단건 조회 (classId)
+    public ClassVO findById(int classId) {
+        String sql = "SELECT * FROM class WHERE id = ?";
+
+        return jdbcTemplate.queryForObject(
+                sql,
+                (rs, rowNum) -> {
+                    ClassVO c = new ClassVO();
+                    c.setId(rs.getInt("id"));
+                    c.setClassCode(rs.getString("class_code"));
+                    c.setClassName(rs.getString("class_name"));
+                    c.setTeacherId(rs.getInt("teacher_id"));
+                    return c;
+                },
+                classId
+        );
+    }
+
+
 }

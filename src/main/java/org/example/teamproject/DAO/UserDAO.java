@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserDAO {
 
@@ -52,4 +54,43 @@ public class UserDAO {
                 user.getClassCode()
         );
     }
+
+    // 학생 목록
+    public List<UserVO> findStudentsByClassCode(String classCode) {
+        String sql = "SELECT * FROM user WHERE role = 'STUDENT' AND class_code = ? ORDER BY username";
+
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) -> {
+                    UserVO u = new UserVO();
+                    u.setId(rs.getInt("id"));
+                    u.setUsername(rs.getString("username"));
+                    u.setEmail(rs.getString("email"));
+                    u.setRole(rs.getString("role"));
+                    u.setClassCode(rs.getString("class_code"));
+                    return u;
+                },
+                classCode
+        );
+    }
+
+    // 학부모 목록
+    public List<UserVO> findParentsByClassCode(String classCode) {
+        String sql = "SELECT * FROM user WHERE role = 'PARENT' AND class_code = ? ORDER BY username";
+
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) -> {
+                    UserVO u = new UserVO();
+                    u.setId(rs.getInt("id"));
+                    u.setUsername(rs.getString("username"));
+                    u.setEmail(rs.getString("email"));
+                    u.setRole(rs.getString("role"));
+                    u.setClassCode(rs.getString("class_code"));
+                    return u;
+                },
+                classCode
+        );
+    }
+
 }

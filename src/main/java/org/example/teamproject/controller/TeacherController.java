@@ -2,6 +2,7 @@ package org.example.teamproject.controller;
 
 import org.example.teamproject.DAO.ClassDAO;
 import org.example.teamproject.DAO.NoticeDAO;
+import org.example.teamproject.DAO.PostDAO;
 import org.example.teamproject.DAO.UserDAO;
 import org.example.teamproject.vo.ClassVO;
 import org.example.teamproject.vo.UserVO;
@@ -24,6 +25,11 @@ public class TeacherController {
 
     @Autowired
     private NoticeDAO noticeDAO;
+
+    @Autowired
+    private PostDAO postDAO;
+
+
 
     // 선생님 메인
     @GetMapping("/home")
@@ -116,6 +122,30 @@ public class TeacherController {
 
         return "redirect:/teacher/class";
     }
+
+    @GetMapping("/class/{classCode}/student/{studentId}/diaries")
+    public String studentDiaryList(
+            @PathVariable String classCode,
+            @PathVariable int studentId,
+            Model model
+    ) {
+
+        UserVO student = userDAO.findById(studentId);
+
+        if (student == null || !classCode.equals(student.getClassCode())) {
+            return "redirect:/error";
+        }
+
+        model.addAttribute("student", student);
+        model.addAttribute(
+                "diaries",
+                postDAO.findStudentDiaries(studentId, classCode)
+        );
+
+        return "teacher/student_diary_list";
+    }
+
+
 
 
 }

@@ -45,4 +45,33 @@ public class UserDAO {
                 classCode
         );
     }
+<<<<<<< HEAD
+=======
+
+    // 사용자 ID로 조회 (학생/학부모/교사 공용)
+    public UserVO findById(int id) {
+        String sql = "SELECT * FROM user WHERE id = ?";
+
+        try {
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    (rs, rowNum) -> {
+                        UserVO user = new UserVO();
+                        user.setId(rs.getInt("id"));
+                        user.setUsername(rs.getString("username"));
+                        user.setPassword(rs.getString("password"));
+                        user.setEmail(rs.getString("email"));
+                        user.setRole(rs.getString("role"));
+                        user.setClassCode(rs.getString("class_code"));
+                        return user;
+                    },
+                    id
+            );
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+>>>>>>> c9369106ae7ba320b2b388db08f41325ecef48cc
 }

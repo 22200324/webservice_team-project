@@ -16,9 +16,8 @@
 
 <!-- 🏫 학급 정보 -->
 <div class="section">
-  <h2>🏫 ${clazz.className}</h2>
-  <p>학급 코드</p>
-  <div class="code">${clazz.classCode}</div>
+  <h1>🏫 ${clazz.className}</h1>
+  <div class="code"> <label>학급 코드 : </label> ${clazz.classCode}</div>
   <p style="color:#777;">학생/학부모에게 이 코드를 알려주세요</p>
 </div>
 
@@ -30,7 +29,11 @@
   </c:if>
   <ul>
     <c:forEach var="s" items="${students}">
-      <li>${s.username} (${s.email})</li>
+      <li>
+        <a href="${pageContext.request.contextPath}/teacher/class/${clazz.classCode}/student/${s.id}/diaries">
+          ${s.username}(${s.email})
+        </a>
+      </li>
     </c:forEach>
   </ul>
 </div>

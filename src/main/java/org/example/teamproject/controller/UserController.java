@@ -46,12 +46,6 @@ public class UserController {
         // 로그인 성공 → 세션 저장
         session.setAttribute("loginUser", loginUser);
 
-        // 🔥 인터셉터에서 저장한 원래 요청 페이지 우선 이동
-        String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
-        if (redirectUrl != null) {
-            session.removeAttribute("redirectAfterLogin");
-            return "redirect:" + redirectUrl;
-        }
 
         // 역할별 기본 홈
         switch (loginUser.getRole()) {
